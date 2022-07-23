@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { HOTELS } from './mocks';
-import { MAX_COUNT_OFFER } from './const';
+import { OFFERS } from './mocks';
+import { MAX_COUNT_OFFER } from './constants';
 
 
 const root = ReactDOM.createRoot(
@@ -11,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App hotels={HOTELS} maxCountOffer={MAX_COUNT_OFFER}/>
+    <App offers={OFFERS} maxCountOffer={MAX_COUNT_OFFER}/>
   </React.StrictMode>,
 );

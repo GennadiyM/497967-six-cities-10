@@ -6,7 +6,7 @@ type CityTabProps = {
 
 export default function CityTab({city, isActive, onClick} : CityTabProps) :JSX.Element {
   return (
-    <a className={`locations__item-link tabs__item ${isActive && 'tabs__item--active'}`} href="#" onClick={onClick}>
+    <a className={`locations__item-link tabs__item ${isActive && 'tabs__item--active'}`} href={`#${city}`} onClick={onClick}>
       <span>{city}</span>
     </a>
   );

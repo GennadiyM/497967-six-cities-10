@@ -1,4 +1,4 @@
-import { CITIES } from '../../../const';
+import { CITIES } from '../../../constants';
 import { useState } from 'react';
 import CityTab from '../../atoms/city-tab/city-tab';
 

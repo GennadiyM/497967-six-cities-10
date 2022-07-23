@@ -1,4 +1,4 @@
-export const HOTELS = [
+export const OFFERS = [
   {
     'city': {
       'name': 'Dusseldorf',
@@ -80,7 +80,7 @@ export const HOTELS = [
       'https://10.react.pages.academy/static/hotel/4.jpg'
     ],
     'title': 'Nice, cozy, warm big bed apartment',
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 3.3,
     'type': 'house',

@@ -3,7 +3,7 @@ const COUNT_STARS = 5;
 
 const getRating = (rating: number): number => (rating * FULL_RATING) / COUNT_STARS;
 
-export default function Rating({ rating }: { rating: number }): JSX.Element {
+export default function Rating({ rating }: { rating: number }) {
   return (
     <div className="place-card__rating rating">
       <div className="place-card__stars rating__stars">

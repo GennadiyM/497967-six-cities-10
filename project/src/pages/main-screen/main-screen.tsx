@@ -1,11 +1,11 @@
-import { Offer } from '../../components/atoms/place-card/place-card';
 import PageLayout from '../../components/layouts/page-layout/page-layout';
 import CitiesTabs from '../../components/molecules/cities-tabs/cities-tabs';
 import MainContent from '../../components/molecules/main-content/main-content';
 import MainEmpty from '../../components/molecules/main-empty/main-empty';
+import { BaseOffer } from '../../types/base-offer';
 
 export type MainScreenProps = {
-  offers: Offer[];
+  offers: BaseOffer[];
   maxCountOffer: number;
 };
 

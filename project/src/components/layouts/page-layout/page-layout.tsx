@@ -1,14 +1,13 @@
 
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
 type PageLayoutProps = {
-  children: ReactNode | ReactNode[];
   withFooter?: boolean;
 }
 
-export default function PageLayout({withFooter = false, children} : PageLayoutProps): JSX.Element {
+export default function PageLayout({withFooter, children} : PropsWithChildren<PageLayoutProps>) {
   return (
     <div className='page page--gray page--main'>
       <Header/>

@@ -1,8 +1,9 @@
-import PlaceCard, { Offer } from '../../atoms/place-card/place-card';
+import { BaseOffer } from '../../../types/base-offer';
+import PlaceCard from '../../atoms/place-card/place-card';
 import Sort from '../../atoms/sort/sort';
 
 type MainContentProps = {
-  offers: Offer[];
+  offers: BaseOffer[];
   maxCountOffer: number;
 };
 

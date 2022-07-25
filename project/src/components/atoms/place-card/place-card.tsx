@@ -1,29 +1,16 @@
+import { BaseOffer } from '../../../types/base-offer';
 import Rating from '../rating/rating';
 
-const TEMPLATE_PREMIUM = <div className="place-card__mark"><span>Premium</span></div>;
-
-export interface Offer {
-  isPremium: boolean;
-  isFavorite: boolean;
-  previewImage: string;
-  title: string;
-  rating: number;
-  type: string;
-  price: number;
-  id: number;
-}
-
 type PlaceCardProps = {
-  offer: Offer;
+  offer: BaseOffer;
 }
 
-export default function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+export default function PlaceCard({offer}: PlaceCardProps) {
   const {isPremium, isFavorite, previewImage, title, rating, type, price, id} = offer;
 
   return (
     <article className="cities__card place-card">
-      {isPremium ? TEMPLATE_PREMIUM : ''}
-
+      {isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href={`/offer/${id}`}>
           <img

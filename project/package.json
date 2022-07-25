@@ -25,10 +25,7 @@
       "react-app",
       "react-app/jest",
       "htmlacademy/react-typescript"
-    ],
-    "rules": {
-      "no-console": "off"
-    }
+    ]
   },
   "browserslist": {
     "production": [

@@ -1,7 +1,5 @@
 import MainScreen, { MainScreenProps } from '../../pages/main-screen/main-screen';
 
-type AppProps = MainScreenProps;
-
-export default function App({offers, maxCountOffer} : AppProps): JSX.Element {
+export default function App({offers, maxCountOffer} : MainScreenProps) {
   return <MainScreen offers={offers} maxCountOffer={maxCountOffer}/>;
 }

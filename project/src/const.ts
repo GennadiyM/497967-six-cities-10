@@ -28,6 +28,7 @@ export enum AppRoute {
   Favorites = '/favorites',
   Room = '/offer',
   Root = '/',
+  NotFoundOffer = '/not-found-offer',
 }
 
 export enum AuthorizationStatus {
@@ -40,6 +41,11 @@ export enum PlaceCardClass {
   Main = 'cities',
   Near = 'near-places',
   Favorite = 'favorites',
+}
+
+export enum RatingClass {
+  Card = 'place-card',
+  Property = 'property',
 }
 
 export const ImageSize = {

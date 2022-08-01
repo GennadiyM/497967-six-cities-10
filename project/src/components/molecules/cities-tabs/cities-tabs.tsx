@@ -1,4 +1,4 @@
-import { CITIES } from '../../../constants';
+import { CITIES } from '../../../const';
 import { MouseEvent, useState } from 'react';
 import CityTab from '../../atoms/city-tab/city-tab';
 

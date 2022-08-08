@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import { PlaceCardClass, ImageSize, AppRoute } from '../../../const';
+import { PlaceCardClassTypeType, ImageSize, AppRoute } from '../../../const';
 import { BaseOffer } from '../../../types/base-offer';
 import Rating from '../rating/rating';
 
 type PlaceCardProps = {
   offer: BaseOffer;
-  cardClass?: PlaceCardClass;
+  cardClass?: PlaceCardClassType;
 }
 
-export default function PlaceCard({offer, cardClass = PlaceCardClass.Main}: PlaceCardProps) {
+export default function PlaceCard({offer, cardClass = PlaceCardClassType.Main}: PlaceCardProps) {
   const {isPremium, isFavorite, previewImage, title, rating, type, price, id} = offer;
-  const isFavoriteClass = cardClass === PlaceCardClass.Favorite;
+  const isFavoriteClass = cardClass === PlaceCardClassType.Favorite;
   const imageSize = isFavoriteClass ? ImageSize.Small : ImageSize.Big;
 
   return (

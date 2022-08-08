@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PageLayout from '../../components/layouts/page-layout/page-layout';
 import FullCard from '../../components/molecules/full-card/full-card';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AuthorizationStatus } from '../../const';
 import { OFFERS } from '../../mocks';
+
 export default function OfferScreen({
   authorizationStatus,
 }: {
@@ -11,13 +11,10 @@ export default function OfferScreen({
 }) {
   const { id } = useParams();
   const [filteredOffer] = OFFERS.filter((offer) => offer.id.toString() === id); //todo
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!filteredOffer) {
-      navigate(AppRoute.NotFoundOffer);
-    }
-  }, [filteredOffer, navigate]);
+  if (!filteredOffer) {
+    return null;
+  }
 
   return (
     filteredOffer && (

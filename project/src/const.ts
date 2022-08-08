@@ -37,7 +37,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum PlaceCardClass {
+export enum PlaceCardClassType {
   Main = 'cities',
   Near = 'near-places',
   Favorite = 'favorites',

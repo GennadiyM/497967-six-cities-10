@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CITIES, PlaceCardClass } from '../../../const';
+import { CITIES, PlaceCardClassType } from '../../../const';
 import { FullOffer } from '../../../types/base-offer';
 import PlaceCard from '../../atoms/place-card/place-card';
 
@@ -51,7 +51,7 @@ export default function FavoritesList({ offers }: { offers: FullOffer[] }) {
                         price,
                         id,
                       }}
-                      cardClass={PlaceCardClass.Favorite}
+                      cardClass={PlaceCardClassType.Favorite}
                       key={id}
                     />
                   )

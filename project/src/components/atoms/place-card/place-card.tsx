@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PlaceCardClassTypeType, ImageSize, AppRoute } from '../../../const';
+import { PlaceCardClassType, ImageSize, AppRoute } from '../../../const';
 import { BaseOffer } from '../../../types/base-offer';
 import Rating from '../rating/rating';
 

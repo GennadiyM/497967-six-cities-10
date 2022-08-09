@@ -1,18 +1,26 @@
+import { RatingClass } from '../../../const';
+
 const FULL_RATING = 100;
 const COUNT_STARS = 5;
 
-const getRating = (rating: number): number => (rating * FULL_RATING) / COUNT_STARS;
+const getRating = (rating: number): number =>
+  (rating * FULL_RATING) / COUNT_STARS;
 
-export default function Rating({ rating }: { rating: number }) {
+export default function Rating({
+  rating,
+  ratingClass = RatingClass.Card,
+}: {
+  rating: number;
+  ratingClass?: RatingClass;
+}) {
   return (
-    <div className="place-card__rating rating">
-      <div className="place-card__stars rating__stars">
+    <div className={`${ratingClass}__rating rating`}>
+      <div className={`${ratingClass}__stars rating__stars`}>
         <span
           style={{
             width: `${getRating(rating)}%`,
           }}
-        >
-        </span>
+        />
         <span className="visually-hidden">Rating</span>
       </div>
     </div>

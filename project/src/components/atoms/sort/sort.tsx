@@ -1,16 +1,16 @@
 import { MouseEvent, useState } from 'react';
-import { Sorting, SORTING_NAME } from '../../../constants';
+import { Sorting, SORTING_NAME } from '../../../const';
 
 
 export default function Sort() {
-  const [sortCurrent, setSortCurrent] = useState(Sorting.POPULAR);
+  const [sortCurrent, setSortCurrent] = useState(Sorting.Popular);
   const [isOpened, setIsOpened] = useState(false);
 
   const filterOpenClickHandler = () => setIsOpened(!isOpened);
 
   const filerOptionClickHandler = (evt: MouseEvent) => {
     const activeElement = evt.target as HTMLLIElement;
-    setSortCurrent(activeElement.dataset.target ?? Sorting.POPULAR);
+    setSortCurrent(activeElement.dataset.target ?? Sorting.Popular);
     setIsOpened(false);
   };
 

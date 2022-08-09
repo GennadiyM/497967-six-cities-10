@@ -4,12 +4,10 @@ import Sort from '../../atoms/sort/sort';
 
 type MainContentProps = {
   offers: BaseOffer[];
-  maxCountOffer: number;
 };
 
 export default function MainContent({
   offers,
-  maxCountOffer,
 }: MainContentProps): JSX.Element {
   return (
     <div className="cities">
@@ -19,7 +17,7 @@ export default function MainContent({
           <b className="places__found">312 places to stay in Amsterdam</b>
           <Sort />
           <div className="cities__places-list places__list tabs__content">
-            {offers.slice(0, maxCountOffer).map((offer) => (
+            {offers.map((offer) => (
               <PlaceCard key={`offer-${offer.id}`} offer={offer} />
             ))}
           </div>

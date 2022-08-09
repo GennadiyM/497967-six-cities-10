@@ -1,28 +1,33 @@
+import { Link } from 'react-router-dom';
+import { PlaceCardClassType, ImageSize, AppRoute } from '../../../const';
 import { BaseOffer } from '../../../types/base-offer';
 import Rating from '../rating/rating';
 
 type PlaceCardProps = {
   offer: BaseOffer;
+  cardClass?: PlaceCardClassType;
 }
 
-export default function PlaceCard({offer}: PlaceCardProps) {
+export default function PlaceCard({offer, cardClass = PlaceCardClassType.Main}: PlaceCardProps) {
   const {isPremium, isFavorite, previewImage, title, rating, type, price, id} = offer;
+  const isFavoriteClass = cardClass === PlaceCardClassType.Favorite;
+  const imageSize = isFavoriteClass ? ImageSize.Small : ImageSize.Big;
 
   return (
-    <article className="cities__card place-card">
+    <article className={`${cardClass}__card place-card`}>
       {isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href={`/offer/${id}`}>
+      <div className={`${cardClass}__image-wrapper place-card__image-wrapper`}>
+        <Link to={`${AppRoute.Room}/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
-            width="260"
-            height="200"
+            width={imageSize.width}
+            height={imageSize.height}
             alt={title}
           />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`place-card__info ${isFavoriteClass && 'favorites__card-info'}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -37,7 +42,7 @@ export default function PlaceCard({offer}: PlaceCardProps) {
         </div>
         <Rating rating={rating}/>
         <h2 className="place-card__name">
-          <a href={`/offer/${id}`}>Beautiful &amp; luxurious apartment at great location</a>
+          <Link to={`${AppRoute.Room}/${id}`}>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

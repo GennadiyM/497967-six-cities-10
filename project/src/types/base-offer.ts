@@ -1,3 +1,10 @@
+export type HostType = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
+  name: string;
+};
+
 export type BaseOffer = {
   isPremium: boolean;
   isFavorite: boolean;
@@ -21,12 +28,7 @@ export type FullOffer = BaseOffer & {
   };
   description: string;
   goods: string[];
-  host: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-  };
+  host: HostType;
   images: string[];
   location: {
     latitude: number;

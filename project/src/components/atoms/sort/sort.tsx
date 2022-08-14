@@ -1,7 +1,6 @@
 import { MouseEvent, useState } from 'react';
 import { Sorting, SORTING_NAME } from '../../../const';
 
-
 export default function Sort() {
   const [sortCurrent, setSortCurrent] = useState(Sorting.Popular);
   const [isOpened, setIsOpened] = useState(false);
@@ -15,16 +14,16 @@ export default function Sort() {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by </span>
+    <form className='places__sorting' action='#' method='get'>
+      <span className='places__sorting-caption'>Sort by </span>
       <span
-        className="places__sorting-type"
+        className='places__sorting-type'
         tabIndex={0}
         onClick={filterOpenClickHandler}
       >
         {SORTING_NAME[sortCurrent]}
-        <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select"></use>
+        <svg className='places__sorting-arrow' width='7' height='4'>
+          <use xlinkHref='#icon-arrow-select'></use>
         </svg>
       </span>
       <ul

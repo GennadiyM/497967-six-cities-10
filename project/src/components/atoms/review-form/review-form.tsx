@@ -1,23 +1,21 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { RatingTitle, ReviewLength } from '../../../const';
+import { ChangeEvent, Fragment, useState } from 'react';
+import { RatingValue, RatingTitle, ReviewLength } from '../../../const';
 
 export default function ReviewForm() {
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [isDisableSubmit, setDisableSubmit] = useState(true);
+  const [formData, setFormData] = useState({ review: '', rating: '0' });
 
-  const textareaChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) =>
-    setComment(evt.target.value);
+  const fieldChangeHandle = (
+    evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = evt.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  useEffect(() => {
-    if (
-      rating > 0 &&
-      comment.length > ReviewLength.MIN &&
-      comment.length <= ReviewLength.MAX
-    ) {
-      setDisableSubmit((prev) => !prev);
-    }
-  }, [rating, comment]);
+  const isDisableSubmit = () =>
+    +formData.rating <= RatingValue.MIN ||
+    +formData.rating >= RatingValue.MAX ||
+    formData.review.length <= ReviewLength.MIN ||
+    formData.review.length >= ReviewLength.MAX;
 
   return (
     <form className='reviews__form form' action='#' method='post'>
@@ -27,15 +25,15 @@ export default function ReviewForm() {
 
       <div className='reviews__rating-form form__rating'>
         {Object.entries(RatingTitle).map(([value, name]) => (
-          <>
+          <Fragment key={name}>
             <input
               className='form__rating-input visually-hidden'
               name='rating'
               value={value}
               id={`${value}-stars}`}
               type='radio'
-              onChange={() => setRating(+value)}
-              checked={rating === +value}
+              onChange={fieldChangeHandle}
+              checked={formData.rating === value}
             />
             <label
               htmlFor={`${value}-stars}`}
@@ -46,7 +44,7 @@ export default function ReviewForm() {
                 <use xlinkHref='#icon-star'></use>
               </svg>
             </label>
-          </>
+          </Fragment>
         ))}
       </div>
       <textarea
@@ -54,10 +52,9 @@ export default function ReviewForm() {
         id='review'
         name='review'
         placeholder='Tell how was your stay, what you like and what can be improved'
-        onChange={textareaChangeHandle}
-      >
-        {comment}
-      </textarea>
+        onChange={fieldChangeHandle}
+        defaultValue={formData.review}
+      />
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>
           To submit review please make sure to set{' '}
@@ -67,7 +64,7 @@ export default function ReviewForm() {
         <button
           className='reviews__submit form__submit button'
           type='submit'
-          disabled={isDisableSubmit}
+          disabled={isDisableSubmit()}
         >
           Submit
         </button>

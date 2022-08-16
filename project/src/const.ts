@@ -72,3 +72,8 @@ export const ReviewLength = {
   MIN: 50,
   MAX: 300,
 };
+
+export const RatingValue = {
+  MIN: 1,
+  MAX: 5,
+};

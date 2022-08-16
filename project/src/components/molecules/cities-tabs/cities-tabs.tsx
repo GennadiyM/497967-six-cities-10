@@ -11,11 +11,11 @@ export default function CitiesTabs(): JSX.Element {
   };
 
   return (
-    <div className="tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
+    <div className='tabs'>
+      <section className='locations container'>
+        <ul className='locations__list tabs__list'>
           {CITIES.map((city) => (
-            <li className="locations__item" key={`tab-${city}`}>
+            <li className='locations__item' key={`tab-${city}`}>
               <CityTab
                 city={city}
                 data-city={city}

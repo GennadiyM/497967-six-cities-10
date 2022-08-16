@@ -27,7 +27,7 @@ export const OFFERS = [
     ],
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
     'isFavorite': false,
-    'isPremium': false,
+    'isPremium': true,
     'rating': 4.1,
     'type': 'hotel',
     'bedrooms': 2,

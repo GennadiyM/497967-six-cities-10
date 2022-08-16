@@ -21,7 +21,7 @@ export default function Rating({
             width: `${getRating(rating)}%`,
           }}
         />
-        <span className="visually-hidden">Rating</span>
+        <span className='visually-hidden'>Rating</span>
       </div>
     </div>
   );

@@ -10,25 +10,25 @@ export default function FavoritesList({ offers }: { offers: FullOffer[] }) {
   }));
 
   return (
-    <ul className="favorites__list">
+    <ul className='favorites__list'>
       {sortedByCityOffers.map(
         (item) =>
           item.offers.length > 0 && (
             <li
-              className="favorites__locations-items"
+              className='favorites__locations-items'
               key={`favorite-${item.name}`}
             >
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
+              <div className='favorites__locations locations locations--current'>
+                <div className='locations__item'>
                   <Link
-                    className="locations__item-link"
+                    className='locations__item-link'
                     to={`/?city=${item.name}`}
                   >
                     <span>{item.name}</span>
                   </Link>
                 </div>
               </div>
-              <div className="favorites__places">
+              <div className='favorites__places'>
                 {item.offers.map(
                   ({
                     isPremium,

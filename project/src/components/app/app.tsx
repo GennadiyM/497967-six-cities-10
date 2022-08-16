@@ -11,7 +11,7 @@ import ScrollToTop from '../scrollToTop/scrollToTop';
 
 export const authorizationStatus = AuthorizationStatus.Auth; //todo
 
-export default function App({ offers }: {offers: FullOffer[]}) {
+export default function App({ offers }: { offers: FullOffer[] }) {
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -29,7 +29,10 @@ export default function App({ offers }: {offers: FullOffer[]}) {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen authorizationStatus={authorizationStatus}/>
+              <FavoritesScreen
+                authorizationStatus={authorizationStatus}
+                offers={offers}
+              />
             </PrivateRoute>
           }
         />
@@ -39,10 +42,15 @@ export default function App({ offers }: {offers: FullOffer[]}) {
         />
         <Route
           path={`${AppRoute.Room}/:id`}
-          element={<OfferScreen authorizationStatus={authorizationStatus} />}
+          element={
+            <OfferScreen
+              authorizationStatus={authorizationStatus}
+              offers={offers}
+            />
+          }
         />
         <Route
-          path="*"
+          path='*'
           element={<NotFoundScreen authorizationStatus={authorizationStatus} />}
         />
       </Routes>

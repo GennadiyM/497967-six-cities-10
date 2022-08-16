@@ -46,6 +46,7 @@ export enum PlaceCardClassType {
 export enum RatingClass {
   Card = 'place-card',
   Property = 'property',
+  Reviews = 'reviews',
 }
 
 export const ImageSize = {
@@ -57,4 +58,22 @@ export const ImageSize = {
     height: 110,
     width: 150,
   }
+};
+
+export const RatingTitle = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect'
+};
+
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 300,
+};
+
+export const RatingValue = {
+  MIN: 1,
+  MAX: 5,
 };

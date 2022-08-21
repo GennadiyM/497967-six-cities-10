@@ -5,6 +5,15 @@ export type HostType = {
   name: string;
 };
 
+export type City = {
+  name: string;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+};
+
 export type BaseOffer = {
   isPremium: boolean;
   isFavorite: boolean;
@@ -18,14 +27,7 @@ export type BaseOffer = {
 
 export type FullOffer = BaseOffer & {
   bedrooms: number;
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
+  city: City;
   description: string;
   goods: string[];
   host: HostType;

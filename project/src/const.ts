@@ -1,5 +1,9 @@
 export const MAX_COUNT_IMAGE = 6;
 
+export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
+export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+
 export const CITIES = [
   'Paris',
   'Cologne',
@@ -47,6 +51,11 @@ export enum RatingClass {
   Card = 'place-card',
   Property = 'property',
   Reviews = 'reviews',
+}
+
+export enum MapClass {
+  City = 'cities__map',
+  Property = 'property__map',
 }
 
 export const ImageSize = {

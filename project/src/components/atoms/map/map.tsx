@@ -14,21 +14,21 @@ type MapProps = {
   className?: string;
 };
 
+const defaultIcon = new Icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+const selectedIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
 export default function Map({ points, city, activePointId, style, className = MapClass.City }: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-
-  const defaultIcon = new Icon({
-    iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
-  const selectedIcon = new Icon({
-    iconUrl: URL_MARKER_CURRENT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
 
   useEffect(() => {
     if (map) {
@@ -43,7 +43,7 @@ export default function Map({ points, city, activePointId, style, className = Ma
         marker.addTo(map);
       });
     }
-  });
+  }, [activePointId, map, points]);
 
   return <section className={`${className} map`} ref={mapRef} style={style}></section>;
 }

@@ -5,18 +5,17 @@ import PageLayout from '../../components/layouts/page-layout/page-layout';
 import NearPlaces from '../../components/molecules/near-places/near-places';
 import FullCard from '../../components/organisms/full-card/full-card';
 import { AuthorizationStatus } from '../../const';
-import { FullOffer } from '../../types/base-offer';
+import { useAppSelector } from '../../hooks/redux';
 
 const MAX_COUNT_NEAR_PLACE = 3;
 
 export default function OfferScreen({
   authorizationStatus,
-  offers,
 }: {
   authorizationStatus: AuthorizationStatus;
-  offers: FullOffer[];
 }) {
   const { id } = useParams();
+  const offers = useAppSelector((state) => state.offers);
   const [filteredOffer] = offers.filter((offer) => offer.id.toString() === id); //todo
   const city = offers[0].city;
 

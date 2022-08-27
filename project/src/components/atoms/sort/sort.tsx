@@ -1,15 +1,18 @@
 import { MouseEvent, useState } from 'react';
 import { Sorting, SORTING_NAME } from '../../../const';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { changeSorting } from '../../../store/action';
 
 export default function Sort() {
-  const [sortCurrent, setSortCurrent] = useState(Sorting.Popular);
   const [isOpened, setIsOpened] = useState(false);
+  const sorting = useAppSelector((state) => state.sorting);
+  const dispatch = useAppDispatch();
 
   const filterOpenClickHandler = () => setIsOpened(!isOpened);
 
   const filerOptionClickHandler = (evt: MouseEvent) => {
     const activeElement = evt.target as HTMLLIElement;
-    setSortCurrent(activeElement.dataset.target ?? Sorting.Popular);
+    dispatch(changeSorting(activeElement.dataset.target ?? Sorting.Popular));
     setIsOpened(false);
   };
 
@@ -21,7 +24,7 @@ export default function Sort() {
         tabIndex={0}
         onClick={filterOpenClickHandler}
       >
-        {SORTING_NAME[sortCurrent]}
+        {SORTING_NAME[sorting]}
         <svg className='places__sorting-arrow' width='7' height='4'>
           <use xlinkHref='#icon-arrow-select'></use>
         </svg>
@@ -35,7 +38,7 @@ export default function Sort() {
           <li
             key={`sort-${value}`}
             className={`places__option ${
-              sortCurrent === value && 'places__option--active'
+              sorting === value && 'places__option--active'
             }`}
             data-target={value}
             tabIndex={0}

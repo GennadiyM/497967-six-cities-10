@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { City, FullOffer } from '../../../types/base-offer';
+import { Sorting } from '../../../const';
+import { useAppSelector } from '../../../hooks/redux';
+import { City, FullOffer } from '../../../types/offer';
+import { sortByPriceHigh, sortByPriceLow, sortByTopRatedFirst } from '../../../utils';
 import Map from '../../atoms/map/map';
 import PlaceCard from '../../atoms/place-card/place-card';
 import Sort from '../../atoms/sort/sort';
@@ -13,6 +16,25 @@ export type ActiveOfferType = number | null;
 
 export default function MainContent({ offers, city }: MainContentProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferType>(null);
+  const sorting = useAppSelector((state) => state.sorting);
+
+  const getSortingOffers = (stateOffers: FullOffer[]): FullOffer[] => {
+    const sortingOffers = stateOffers.slice();
+
+    switch (sorting) {
+      case Sorting.Popular:
+        return sortingOffers;
+      case Sorting.ToLOw:
+        return sortingOffers.sort(sortByPriceLow);
+      case Sorting.ToHigh:
+        return sortingOffers.sort(sortByPriceHigh);
+      case Sorting.Rated:
+        return sortingOffers.sort(sortByTopRatedFirst);
+      default:
+        return sortingOffers;
+    }
+  };
+
 
   return (
     <div className='cities'>
@@ -22,7 +44,7 @@ export default function MainContent({ offers, city }: MainContentProps): JSX.Ele
           <b className='places__found'>{offers.length} places to stay in {city.name}</b>
           <Sort />
           <div className='cities__places-list places__list tabs__content'>
-            {offers.map((offer) => (
+            {getSortingOffers(offers).map((offer) => (
               <PlaceCard
                 key={`offer-${offer.id}`}
                 offer={offer}

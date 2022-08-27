@@ -3,7 +3,7 @@ import {
   MAX_COUNT_IMAGE,
   RatingClass,
 } from '../../../const';
-import { FullOffer } from '../../../types/base-offer';
+import { FullOffer } from '../../../types/offer';
 import Host from '../../atoms/host/host';
 import Rating from '../../atoms/rating/rating';
 import Reviews from '../../molecules/reviews/reviews';

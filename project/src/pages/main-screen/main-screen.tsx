@@ -4,23 +4,21 @@ import PageLayout, {
 import CitiesTabs from '../../components/molecules/cities-tabs/cities-tabs';
 import MainContent from '../../components/molecules/main-content/main-content';
 import MainEmpty from '../../components/molecules/main-empty/main-empty';
-import { AuthorizationStatus, CITIES } from '../../const';
-import { FullOffer } from '../../types/base-offer';
+import { AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks/redux';
 
 export type MainScreenProps = {
-  offers: FullOffer[];
   authorizationStatus: AuthorizationStatus;
 };
 
 export default function MainScreen({
-  offers,
   authorizationStatus,
 }: MainScreenProps) {
-  const checkedCityName = CITIES[3]; //todo
+  const {city, offers} = useAppSelector((state) => state);
   const filteredOffers = offers.filter(
-    ({ city }) => city.name === checkedCityName
-  ); //todo
-  const city = filteredOffers[0].city; //todo
+    (offer) => offer.city.name === city
+  );
+  const cityInformation = filteredOffers[0].city;
 
   return (
     <PageLayout
@@ -31,7 +29,7 @@ export default function MainScreen({
       {offers.length === 0 ? (
         <MainEmpty />
       ) : (
-        <MainContent offers={filteredOffers} city={city} />
+        <MainContent offers={filteredOffers} city={cityInformation} />
       )}
     </PageLayout>
   );

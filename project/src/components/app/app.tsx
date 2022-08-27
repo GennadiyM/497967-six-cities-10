@@ -5,34 +5,25 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
-import { FullOffer } from '../../types/base-offer';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scrollToTop/scrollToTop';
 
 export const authorizationStatus = AuthorizationStatus.Auth; //todo
 
-export default function App({ offers }: { offers: FullOffer[] }) {
+export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={
-            <MainScreen
-              offers={offers}
-              authorizationStatus={authorizationStatus}
-            />
-          }
+          element={<MainScreen authorizationStatus={authorizationStatus} />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen
-                authorizationStatus={authorizationStatus}
-                offers={offers}
-              />
+              <FavoritesScreen authorizationStatus={authorizationStatus} />
             </PrivateRoute>
           }
         />
@@ -42,12 +33,7 @@ export default function App({ offers }: { offers: FullOffer[] }) {
         />
         <Route
           path={`${AppRoute.Room}/:id`}
-          element={
-            <OfferScreen
-              authorizationStatus={authorizationStatus}
-              offers={offers}
-            />
-          }
+          element={<OfferScreen authorizationStatus={authorizationStatus} />}
         />
         <Route
           path='*'

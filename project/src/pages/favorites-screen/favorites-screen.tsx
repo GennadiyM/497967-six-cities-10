@@ -1,15 +1,15 @@
 import PageLayout from '../../components/layouts/page-layout/page-layout';
 import FavoritesLIst from '../../components/molecules/favorites-list/favorites-list';
 import { AuthorizationStatus } from '../../const';
-import { FullOffer } from '../../types/base-offer';
+import { useAppSelector } from '../../hooks/redux';
 
 export default function FavoritesScreen({
   authorizationStatus,
-  offers,
 }: {
   authorizationStatus: AuthorizationStatus;
-  offers: FullOffer[];
 }) {
+  const offers = useAppSelector((state) => state.offers);
+
   return (
     <PageLayout authorizationStatus={authorizationStatus} withFooter>
       <main className='page__main page__main--favorites'>

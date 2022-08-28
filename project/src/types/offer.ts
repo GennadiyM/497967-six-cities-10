@@ -8,7 +8,7 @@ export type HostType = {
 };
 
 export type City = {
-  name: CityName
+  name: CityName;
   location: {
     latitude: number;
     longitude: number;

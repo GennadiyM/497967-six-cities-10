@@ -95,16 +95,17 @@ export const APIRoute = {
   Offers: '/hotels',
   Login: '/login',
   Logout: '/logout',
+  Favorite: '/favorite',
 
-  fetchReviews(offerId: number) {
+  fetchReviews(offerId: string) {
     return (`/comments/${offerId}`);
   },
 
-  fetchOfferById(offerId: number) {
+  fetchOfferById(offerId: string) {
     return (`${this.Offers}/${offerId}`);
   },
 
-  fetchOffersNearby(offerId: number) {
+  fetchOffersNearby(offerId: string) {
     return (`${this.Offers}/${offerId}/nearby`);
   },
 } as const;

@@ -10,6 +10,9 @@ import {
   setDataLoadedStatus,
   requireAuthorization,
   redirectToRoute,
+  loadNearbyOffers,
+  loadFavoriteOffers,
+  loadOfferById,
 } from './action';
 import { dropToken, saveToken } from '../services/token';
 
@@ -40,6 +43,7 @@ export const checkAuthAction = createAsyncThunk<
   try {
     await api.get(APIRoute.Login);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(fetchFavoriteOffersAction());
   } catch {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   }
@@ -76,14 +80,41 @@ export const logoutAction = createAsyncThunk<
   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
 });
 
-export const fetchNearbyPlacesAction = createAsyncThunk<Offer[], number, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}>(
-  'data/fetchNearPlaces',
-  async (hotelId, { dispatch, extra: api }) => {
-    const { data } = await api.get<Offer[]>(APIRoute.fetchOffersNearby(hotelId));
-    return data;
-  },
-);
+export const fetchNearbyPlacesAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/loadNearbyOffers', async (hotelId, { dispatch, extra: api }) => {
+  const { data } = await api.get<Offer[]>(APIRoute.fetchOffersNearby(hotelId));
+  dispatch(loadNearbyOffers(data));
+});
+
+export const fetchFavoriteOffersAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/loadFavoriteOffers', async (_arg, { dispatch, extra: api }) => {
+  const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+  dispatch(loadFavoriteOffers(data));
+});
+
+export const fetchOfferByIdAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/loadOfferById', async (hotelId, { dispatch, extra: api }) => {
+  const { data } = await api.get<Offer>(APIRoute.fetchOfferById(hotelId));
+  dispatch(loadOfferById(data));
+});

@@ -3,7 +3,6 @@ import { Sorting } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
 import { getSortType } from '../../../store/helpers';
 import { Offer } from '../../../types/offer';
-import { City } from '../../../types/city';
 import { sortByPriceHigh, sortByPriceLow, sortByTopRatedFirst } from '../../../utils';
 import Map from '../../atoms/map/map';
 import PlaceCard from '../../atoms/place-card/place-card';
@@ -11,14 +10,14 @@ import Sort from '../../atoms/sort/sort';
 
 type MainContentProps = {
   offers: Offer[];
-  city: City;
 };
 
 export type ActiveOfferType = number | null;
 
-export default function MainContent({ offers, city }: MainContentProps): JSX.Element {
+export default function MainContent({ offers }: MainContentProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferType>(null);
   const sorting = useAppSelector(getSortType);
+  const city = offers[0].city;
 
   const getSortingOffers = (stateOffers: Offer[]): Offer[] => {
     const sortingOffers = stateOffers.slice();

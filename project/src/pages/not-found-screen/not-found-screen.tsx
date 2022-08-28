@@ -1,14 +1,9 @@
 import NotFound from '../../components/atoms/not-found/not-found';
 import PageLayout from '../../components/layouts/page-layout/page-layout';
-import { AuthorizationStatus } from '../../const';
 
-export default function NotFoundScreen({
-  authorizationStatus,
-}: {
-  authorizationStatus: AuthorizationStatus;
-}) {
+export default function NotFoundScreen() {
   return (
-    <PageLayout authorizationStatus={authorizationStatus}>
+    <PageLayout>
       <NotFound />
     </PageLayout>
   );

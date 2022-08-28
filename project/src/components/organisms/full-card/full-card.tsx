@@ -3,6 +3,8 @@ import {
   MAX_COUNT_IMAGE,
   RatingClass,
 } from '../../../const';
+import { useAppSelector } from '../../../hooks/redux';
+import { getAuthorizationStatus } from '../../../store/helpers';
 import { Offer } from '../../../types/offer';
 import Host from '../../atoms/host/host';
 import Rating from '../../atoms/rating/rating';
@@ -10,10 +12,8 @@ import Reviews from '../../molecules/reviews/reviews';
 
 export default function FullCard({
   offer,
-  authorizationStatus,
 }: {
   offer: Offer;
-  authorizationStatus: AuthorizationStatus;
 }) {
   const {
     images,
@@ -29,6 +29,8 @@ export default function FullCard({
     description,
     rating,
   } = offer;
+
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <>

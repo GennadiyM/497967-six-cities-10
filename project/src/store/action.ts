@@ -4,6 +4,12 @@ import { Offer } from '../types/offer';
 
 export const loadOffers = createAction<Offer[]>('data/loadOffers');
 
+export const loadOfferById = createAction<Offer>('data/loadOfferById');
+
+export const loadNearbyOffers = createAction<Offer[]>('data/loadNearbyOffers');
+
+export const loadFavoriteOffers = createAction<Offer[]>('data/loadFavoriteOffers');
+
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 export const changeCity = createAction('logic/changeCity', (value) => ({

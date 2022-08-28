@@ -1,5 +1,8 @@
-import { Link } from 'react-router-dom';
-import { PlaceCardClassType, ImageSize, AppRoute } from '../../../const';
+import { useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { PlaceCardClassType, ImageSize, AppRoute, AuthorizationStatus } from '../../../const';
+import { useAppSelector } from '../../../hooks/redux';
+import { getAuthorizationStatus } from '../../../store/helpers';
 import { BaseOffer } from '../../../types/offer';
 import Rating from '../rating/rating';
 
@@ -28,6 +31,14 @@ export default function PlaceCard({
   } = offer;
   const isFavoriteClass = cardClass === PlaceCardClassType.Favorite;
   const imageSize = isFavoriteClass ? ImageSize.Small : ImageSize.Big;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const navigate = useNavigate();
+
+  const onFavoriteClick = useCallback(() => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+    }
+  }, [authorizationStatus, navigate]);
 
   return (
     <article
@@ -66,11 +77,12 @@ export default function PlaceCard({
               isFavorite && 'place-card__bookmark-button--active'
             }`}
             type='button'
+            onClick={onFavoriteClick}
           >
             <svg className='place-card__bookmark-icon' width='18' height='19'>
               <use xlinkHref='#icon-bookmark'></use>
             </svg>
-            <span className='visually-hidden'>To bookmarks</span>
+            <span className='visually-hidden'>{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
         <Rating rating={rating} />

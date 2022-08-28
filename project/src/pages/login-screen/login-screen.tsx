@@ -3,17 +3,11 @@ import LoginForm from '../../components/atoms/login-form/login-form';
 import PageLayout, {
   PageLayoutModifier,
 } from '../../components/layouts/page-layout/page-layout';
-import { AuthorizationStatus } from '../../const';
 
-export default function LoginScreen({
-  authorizationStatus,
-}: {
-  authorizationStatus: AuthorizationStatus;
-}) {
+export default function LoginScreen() {
   return (
     <PageLayout
       modifier={PageLayoutModifier.Login}
-      authorizationStatus={authorizationStatus}
       withoutUserControl
     >
       <main className='page__main page__main--login'>

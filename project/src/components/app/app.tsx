@@ -28,27 +28,27 @@ export default function App() {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen authorizationStatus={authorizationStatus} />}
+          element={<MainScreen />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen authorizationStatus={authorizationStatus} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginScreen authorizationStatus={authorizationStatus} />}
+          element={<LoginScreen />}
         />
         <Route
           path={`${AppRoute.Room}/:id`}
-          element={<OfferScreen authorizationStatus={authorizationStatus} />}
+          element={<OfferScreen />}
         />
         <Route
           path='*'
-          element={<NotFoundScreen authorizationStatus={authorizationStatus} />}
+          element={<NotFoundScreen />}
         />
       </Routes>
     </HistoryRoute>

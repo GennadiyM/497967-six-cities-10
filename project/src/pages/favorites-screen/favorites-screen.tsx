@@ -1,26 +1,33 @@
-import PageLayout from '../../components/layouts/page-layout/page-layout';
-import FavoritesLIst from '../../components/molecules/favorites-list/favorites-list';
-import { AuthorizationStatus } from '../../const';
+import FavoritesEmpty from '../../components/atoms/favorites-empty/favorites-empty';
+import PageLayout, {
+  PageLayoutModifier,
+} from '../../components/layouts/page-layout/page-layout';
+import FavoritesContainer from '../../components/molecules/favorites-container/favorites-container';
 import { useAppSelector } from '../../hooks/redux';
+import { getFavoriteOffers } from '../../store/helpers';
 
-export default function FavoritesScreen({
-  authorizationStatus,
-}: {
-  authorizationStatus: AuthorizationStatus;
-}) {
-  const offers = useAppSelector((state) => state.offers);
+export default function FavoritesScreen() {
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   return (
-    <PageLayout authorizationStatus={authorizationStatus} withFooter>
-      <main className='page__main page__main--favorites'>
-        <div className='page__favorites-container container'>
-          <section className='favorites'>
-            <h1 className='favorites__title'>Saved listing</h1>
-            <FavoritesLIst
-              offers={offers.filter(({ isFavorite }) => isFavorite)}
-            />
-          </section>
-        </div>
+    <PageLayout
+      withFooter
+      modifier={
+        favoriteOffers.length === 0
+          ? PageLayoutModifier.FavoritesEmpty
+          : undefined
+      }
+    >
+      <main
+        className={`page__main page__main--favorites ${
+          favoriteOffers.length === 0 && 'page__main--favorites-empty'
+        }`}
+      >
+        {favoriteOffers.length > 0 ? (
+          <FavoritesContainer offers={favoriteOffers} />
+        ) : (
+          <FavoritesEmpty />
+        )}
       </main>
     </PageLayout>
   );

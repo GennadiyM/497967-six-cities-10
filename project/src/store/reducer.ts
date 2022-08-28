@@ -1,11 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CITIES, Sorting } from '../const';
 import { CityName } from '../types/city-name';
-import { FullOffer } from '../types/offer';
+import { Offer } from '../types/offer';
 import { changeCity, changeSorting, loadOffers, requireAuthorization, setDataLoadedStatus } from './action';
 
-type InitialState = {
-  offers: FullOffer[],
+export type InitialState = {
+  offers: Offer[],
   city: CityName,
   sorting: Sorting,
   authorizationStatus: AuthorizationStatus,

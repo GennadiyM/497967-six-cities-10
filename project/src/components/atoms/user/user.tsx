@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
+import { useAppDispatch } from '../../../hooks/redux';
+import { logoutAction } from '../../../store/api-action';
 
 export default function User() {
+  const dispatch = useAppDispatch();
+
+  const onClickLogout = () => dispatch(logoutAction());
+
   return (
     <nav className='header__nav'>
       <ul className='header__nav-list'>
@@ -18,7 +24,7 @@ export default function User() {
           </Link>
         </li>
         <li className='header__nav-item'>
-          <a className='header__nav-link' href='#sign'>
+          <a className='header__nav-link' href='#sign' onClick={onClickLogout}>
             <span className='header__signout'>Sign out</span>
           </a>
         </li>

@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AppRoute, AuthorizationStatus } from '../const';
-import { FullOffer } from '../types/offer';
+import { Offer } from '../types/offer';
 
-export const loadOffers = createAction<FullOffer[]>('data/loadOffers');
+export const loadOffers = createAction<Offer[]>('data/loadOffers');
 
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 

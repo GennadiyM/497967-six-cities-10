@@ -1,8 +1,8 @@
-import { FullOffer } from './types/offer';
+import { Offer } from './types/offer';
 
-export const sortByPriceHigh = (offerA: FullOffer, offerB: FullOffer) =>
+export const sortByPriceHigh = (offerA: Offer, offerB: Offer) =>
   offerA.price - offerB.price;
-export const sortByPriceLow = (offerA: FullOffer, offerB: FullOffer) =>
+export const sortByPriceLow = (offerA: Offer, offerB: Offer) =>
   offerB.price - offerA.price;
-export const sortByTopRatedFirst = (offerA: FullOffer, offerB: FullOffer) =>
+export const sortByTopRatedFirst = (offerA: Offer, offerB: Offer) =>
   offerB.rating - offerA.rating;

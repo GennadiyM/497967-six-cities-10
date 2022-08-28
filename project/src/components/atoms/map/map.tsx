@@ -1,13 +1,14 @@
 import { CSSProperties, useEffect, useRef } from 'react';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { City, FullOffer } from '../../../types/offer';
+import { Offer } from '../../../types/offer';
+import { City } from '../../../types/city';
 import useMap from '../../../hooks/use-map';
 import { MapClass, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../../const';
 import { ActiveOfferType } from '../../molecules/main-content/main-content';
 
 type MapProps = {
-  points: FullOffer[];
+  points: Offer[];
   city: City;
   activePointId: ActiveOfferType;
   style?: CSSProperties;

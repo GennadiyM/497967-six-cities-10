@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { Routes, Route } from 'react-router-dom';
+import browserHistory from '../../browser-history';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks/redux';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
@@ -7,6 +8,7 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
+import HistoryRoute from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scrollToTop/scrollToTop';
 
@@ -14,14 +16,14 @@ import ScrollToTop from '../scrollToTop/scrollToTop';
 export default function App() {
   const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
-  if (isDataLoaded) {
+  if (isDataLoaded || authorizationStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRoute history={browserHistory}>
       <ScrollToTop />
       <Routes>
         <Route
@@ -49,6 +51,6 @@ export default function App() {
           element={<NotFoundScreen authorizationStatus={authorizationStatus} />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRoute>
   );
 }

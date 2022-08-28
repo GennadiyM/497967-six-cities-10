@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Sorting } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
 import { getSortType } from '../../../store/helpers';
-import { City, FullOffer } from '../../../types/offer';
+import { Offer } from '../../../types/offer';
+import { City } from '../../../types/city';
 import { sortByPriceHigh, sortByPriceLow, sortByTopRatedFirst } from '../../../utils';
 import Map from '../../atoms/map/map';
 import PlaceCard from '../../atoms/place-card/place-card';
 import Sort from '../../atoms/sort/sort';
 
 type MainContentProps = {
-  offers: FullOffer[];
+  offers: Offer[];
   city: City;
 };
 
@@ -19,7 +20,7 @@ export default function MainContent({ offers, city }: MainContentProps): JSX.Ele
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferType>(null);
   const sorting = useAppSelector(getSortType);
 
-  const getSortingOffers = (stateOffers: FullOffer[]): FullOffer[] => {
+  const getSortingOffers = (stateOffers: Offer[]): Offer[] => {
     const sortingOffers = stateOffers.slice();
 
     switch (sorting) {

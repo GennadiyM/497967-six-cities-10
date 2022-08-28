@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
-import { FullOffer } from '../types/offer';
+import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -23,7 +23,7 @@ export const fetchOffersAction = createAsyncThunk<
   }
 >('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
   dispatch(setDataLoadedStatus(true));
-  const { data } = await api.get<FullOffer[]>(APIRoute.Offers);
+  const { data } = await api.get<Offer[]>(APIRoute.Offers);
   dispatch(loadOffers(data));
   dispatch(setDataLoadedStatus(false));
 });
@@ -75,3 +75,15 @@ export const logoutAction = createAsyncThunk<
   dropToken();
   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
 });
+
+export const fetchNearbyPlacesAction = createAsyncThunk<Offer[], number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchNearPlaces',
+  async (hotelId, { dispatch, extra: api }) => {
+    const { data } = await api.get<Offer[]>(APIRoute.fetchOffersNearby(hotelId));
+    return data;
+  },
+);

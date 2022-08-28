@@ -1,3 +1,5 @@
+import { CityName } from './city-name';
+
 export type HostType = {
   avatarUrl: string;
   id: number;
@@ -6,7 +8,7 @@ export type HostType = {
 };
 
 export type City = {
-  name: string;
+  name: CityName
   location: {
     latitude: number;
     longitude: number;

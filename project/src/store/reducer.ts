@@ -4,8 +4,14 @@ import { OFFERS } from '../mocks/offers';
 import { FullOffer } from '../types/offer';
 import { changeCity, changeSorting, loadOffers } from './action';
 
-const initialState = {
-  offers: [] as FullOffer[],
+export type InitialState = {
+  offers: FullOffer[],
+  city: string,
+  sorting: Sorting,
+}
+
+const initialState: InitialState = {
+  offers: [],
   city: CITIES[0],
   sorting: Sorting.Popular
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sorting } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
+import { getSortType } from '../../../store/helpers';
 import { City, FullOffer } from '../../../types/offer';
 import { sortByPriceHigh, sortByPriceLow, sortByTopRatedFirst } from '../../../utils';
 import Map from '../../atoms/map/map';
@@ -16,7 +17,7 @@ export type ActiveOfferType = number | null;
 
 export default function MainContent({ offers, city }: MainContentProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferType>(null);
-  const sorting = useAppSelector((state) => state.sorting);
+  const sorting = useAppSelector(getSortType);
 
   const getSortingOffers = (stateOffers: FullOffer[]): FullOffer[] => {
     const sortingOffers = stateOffers.slice();

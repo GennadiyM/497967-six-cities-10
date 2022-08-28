@@ -2,10 +2,11 @@ import { MouseEvent, useState } from 'react';
 import { Sorting, SORTING_NAME } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { changeSorting } from '../../../store/action';
+import { getSortType } from '../../../store/helpers';
 
 export default function Sort() {
   const [isOpened, setIsOpened] = useState(false);
-  const sorting = useAppSelector((state) => state.sorting);
+  const sorting = useAppSelector(getSortType);
   const dispatch = useAppDispatch();
 
   const filterOpenClickHandler = () => setIsOpened(!isOpened);

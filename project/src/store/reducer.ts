@@ -1,16 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CITIES, Sorting } from '../const';
+import { CityName } from '../types/city-name';
 import { FullOffer } from '../types/offer';
 import { changeCity, changeSorting, loadOffers, requireAuthorization, setDataLoadedStatus } from './action';
 
 type InitialState = {
   offers: FullOffer[],
-  city: string,
+  city: CityName,
   sorting: Sorting,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean;
 }
-
 
 const initialState: InitialState = {
   offers: [],

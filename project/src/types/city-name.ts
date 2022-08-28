@@ -1,7 +1,7 @@
 export type CityName =
-  | "Paris"
-  | "Cologne"
-  | "Brussels"
-  | "Amsterdam"
-  | "Hamburg"
-  | "Dusseldorf";
+  | 'Paris'
+  | 'Cologne'
+  | 'Brussels'
+  | 'Amsterdam'
+  | 'Hamburg'
+  | 'Dusseldorf';

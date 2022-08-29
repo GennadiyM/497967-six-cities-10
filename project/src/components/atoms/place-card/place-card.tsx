@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PlaceCardClassType, ImageSize, AppRoute, AuthorizationStatus } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
-import { getAuthorizationStatus } from '../../../store/helpers';
+import { getAuthorizationStatus } from '../../../store/selectors';
 import { BaseOffer } from '../../../types/offer';
 import Rating from '../rating/rating';
 

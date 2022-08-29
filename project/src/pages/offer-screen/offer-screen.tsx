@@ -6,7 +6,7 @@ import PageLayout from '../../components/layouts/page-layout/page-layout';
 import NearPlaces from '../../components/molecules/near-places/near-places';
 import FullCard from '../../components/organisms/full-card/full-card';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getNearbyOffers, getOffer } from '../../store/helpers';
+import { getNearbyOffers, getOffer } from '../../store/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { fetchOfferByIdAction, fetchNearbyPlacesAction } from '../../store/api-action';
 
@@ -15,19 +15,6 @@ export default function OfferScreen() {
   const offer = useAppSelector(getOffer);
   const nearbyOffers = useAppSelector(getNearbyOffers);
 
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchOfferByIdAction(id));
-      dispatch(fetchNearbyPlacesAction(id));
-    }
-  }, [dispatch, id]);
-
-
-  if (!offer || !nearbyOffers) {
-    return <LoadingScreen />;
-  }
 
   return (
     <PageLayout>

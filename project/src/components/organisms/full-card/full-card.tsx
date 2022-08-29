@@ -4,7 +4,7 @@ import {
   RatingClass,
 } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
-import { getAuthorizationStatus } from '../../../store/helpers';
+import { getAuthorizationStatus } from '../../../store/selectors';
 import { Offer } from '../../../types/offer';
 import Host from '../../atoms/host/host';
 import Rating from '../../atoms/rating/rating';

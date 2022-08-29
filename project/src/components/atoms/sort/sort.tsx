@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react';
 import { Sorting, SORTING_NAME } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { changeSorting } from '../../../store/action';
-import { getSortType } from '../../../store/helpers';
+import { getSortType } from '../../../store/selectors';
 
 export default function Sort() {
   const [isOpened, setIsOpened] = useState(false);

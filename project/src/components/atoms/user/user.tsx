@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { logoutAction } from '../../../store/api-action';
-import { getFavoriteOffers } from '../../../store/helpers';
+import { getFavoriteOffers } from '../../../store/selectors';
 
 export default function User() {
   const dispatch = useAppDispatch();

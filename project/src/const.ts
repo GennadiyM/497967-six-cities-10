@@ -45,6 +45,20 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+  Favorite = '/favorite',
+  Comments = '/comments',
+}
+
+export enum NameSpace {
+  Data = 'DATA',
+  Logic = 'LOGIC',
+  User = 'USER',
+}
+
 export enum PlaceCardClassType {
   Main = 'cities',
   Near = 'near-places',
@@ -90,22 +104,3 @@ export const RatingValue = {
   MIN: 1,
   MAX: 5,
 };
-
-export const APIRoute = {
-  Offers: '/hotels',
-  Login: '/login',
-  Logout: '/logout',
-  Favorite: '/favorite',
-
-  fetchReviews(offerId: string) {
-    return (`/comments/${offerId}`);
-  },
-
-  fetchOfferById(offerId: string) {
-    return (`${this.Offers}/${offerId}`);
-  },
-
-  fetchOffersNearby(offerId: string) {
-    return (`${this.Offers}/${offerId}/nearby`);
-  },
-} as const;

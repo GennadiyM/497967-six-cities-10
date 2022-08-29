@@ -3,7 +3,7 @@ import { MouseEvent } from 'react';
 import CityTab from '../../atoms/city-tab/city-tab';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { changeCity } from '../../../store/action';
-import { getCityName } from '../../../store/helpers';
+import { getCityName } from '../../../store/selectors';
 
 export default function CitiesTabs(): JSX.Element {
   const city = useAppSelector(getCityName);

@@ -10,7 +10,9 @@ export const loadNearbyOffers = createAction<Offer[]>('data/loadNearbyOffers');
 
 export const loadFavoriteOffers = createAction<Offer[]>('data/loadFavoriteOffers');
 
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
+export const setOffersLoadedStatus = createAction<boolean>('data/setOffersLoadedStatus');
+
+export const setFavoritesLoadedStatus = createAction<boolean>('data/setOffersLoadedStatus');
 
 export const changeCity = createAction('logic/changeCity', (value) => ({
   payload: value,

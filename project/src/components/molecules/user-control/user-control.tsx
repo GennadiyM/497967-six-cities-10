@@ -1,6 +1,6 @@
 import { AuthorizationStatus } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
-import { getAuthorizationStatus } from '../../../store/helpers';
+import { getAuthorizationStatus } from '../../../store/selectors';
 import SignInBtn from '../../atoms/sing-in-btn/sing-in-btn';
 import User from '../../atoms/user/user';
 

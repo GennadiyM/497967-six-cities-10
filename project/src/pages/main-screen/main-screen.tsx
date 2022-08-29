@@ -5,9 +5,10 @@ import CitiesTabs from '../../components/molecules/cities-tabs/cities-tabs';
 import MainContent from '../../components/molecules/main-content/main-content';
 import MainEmpty from '../../components/molecules/main-empty/main-empty';
 import { useAppSelector } from '../../hooks/redux';
+import { getState } from '../../store/selectors';
 
 export default function MainScreen() {
-  const { city, offers } = useAppSelector((state) => state);
+  const { city, offers } = useAppSelector(getState);
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
 
   return (

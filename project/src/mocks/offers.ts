@@ -1,4 +1,6 @@
-export const OFFERS = [
+import { FullOffer } from '../types/offer';
+
+export const OFFERS: FullOffer[] = [
   {
     'city': {
       'name': 'Dusseldorf',

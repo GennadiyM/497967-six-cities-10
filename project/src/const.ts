@@ -1,10 +1,12 @@
+import { CityName } from './types/city-name';
+
 export const MAX_COUNT_IMAGE = 6;
 
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
 export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-export const CITIES = [
+export const CITIES: ReadonlyArray<CityName> = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -13,14 +15,14 @@ export const CITIES = [
   'Dusseldorf',
 ];
 
-export const Sorting = {
-  Popular: 'popular',
-  ToHigh: 'price_high',
-  ToLOw: 'price_low',
-  Rated: 'rated',
-};
+export enum Sorting {
+  Popular = 'popular',
+  ToHigh = 'price_high',
+  ToLOw = 'price_low',
+  Rated = 'rated',
+}
 
-export const SORTING_NAME = {
+export const SORTING_NAME: Record<string, string> = {
   [Sorting.Popular]: 'Popular',
   [Sorting.ToHigh]: 'Price: low to high',
   [Sorting.ToLOw]: 'Price: high to low',

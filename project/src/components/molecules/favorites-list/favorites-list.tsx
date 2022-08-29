@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CITIES, PlaceCardClassType } from '../../../const';
-import { FullOffer } from '../../../types/base-offer';
+import { FullOffer } from '../../../types/offer';
 import PlaceCard from '../../atoms/place-card/place-card';
 
 export default function FavoritesList({ offers }: { offers: FullOffer[] }) {

@@ -1,4 +1,4 @@
-import { HostType } from '../../../types/base-offer';
+import { HostType } from '../../../types/offer';
 
 export default function Host({
   host,

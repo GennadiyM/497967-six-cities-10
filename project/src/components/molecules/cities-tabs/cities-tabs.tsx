@@ -1,25 +1,29 @@
 import { CITIES } from '../../../const';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent } from 'react';
 import CityTab from '../../atoms/city-tab/city-tab';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { changeCity } from '../../../store/action';
+import { getCityName } from '../../../store/helpers';
 
 export default function CitiesTabs(): JSX.Element {
-  const [activeTab, setActiveTab] = useState(CITIES[0]);
+  const city = useAppSelector(getCityName);
+  const dispatch = useAppDispatch();
 
   const cityClickHandler = (evt: MouseEvent) => {
     const activeElement = evt.target as HTMLLinkElement;
-    activeElement.dataset.city && setActiveTab(activeElement.dataset.city);
+    dispatch(changeCity(activeElement.dataset.city));
   };
 
   return (
     <div className='tabs'>
       <section className='locations container'>
         <ul className='locations__list tabs__list'>
-          {CITIES.map((city) => (
-            <li className='locations__item' key={`tab-${city}`}>
+          {CITIES.map((cityName) => (
+            <li className='locations__item' key={`tab-${cityName}`}>
               <CityTab
-                city={city}
-                data-city={city}
-                isActive={city === activeTab}
+                city={cityName}
+                data-city={cityName}
+                isActive={city === cityName}
                 onClick={cityClickHandler}
               />
             </li>

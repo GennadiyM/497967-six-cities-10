@@ -2,11 +2,12 @@ import { CITIES } from '../../../const';
 import { MouseEvent } from 'react';
 import CityTab from '../../atoms/city-tab/city-tab';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { changeCity } from '../../../store/action';
-import { getCityName } from '../../../store/helpers';
+import { getCity } from '../../../store/logic-process/selectors';
+import { changeCity } from '../../../store/logic-process/logic-process';
+
 
 export default function CitiesTabs(): JSX.Element {
-  const city = useAppSelector(getCityName);
+  const city = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
   const cityClickHandler = (evt: MouseEvent) => {

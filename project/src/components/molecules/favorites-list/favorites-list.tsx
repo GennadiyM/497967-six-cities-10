@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { CITIES, PlaceCardClassType } from '../../../const';
-import { FullOffer } from '../../../types/offer';
+import { Offer } from '../../../types/offer';
 import PlaceCard from '../../atoms/place-card/place-card';
 
-export default function FavoritesList({ offers }: { offers: FullOffer[] }) {
+export default function FavoritesList({ offers }: { offers: Offer[] }) {
   const sortedByCityOffers = CITIES.map((cityName) => ({
     name: cityName,
     offers: offers.filter(({ city }) => city.name === cityName),

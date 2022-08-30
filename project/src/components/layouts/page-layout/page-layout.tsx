@@ -1,22 +1,21 @@
 import { PropsWithChildren } from 'react';
-import { AuthorizationStatus } from '../../../const';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
 export enum PageLayoutModifier {
   Main = 'page--gray page--main',
   Login = 'page--gray page--login',
+  FavoritesEmpty = 'page--favorites-empty',
+  NotFound = 'page--not-found'
 }
 
 type PageLayoutProps = {
-  authorizationStatus: AuthorizationStatus;
   withFooter?: boolean;
-  modifier?: PageLayoutModifier;
+  modifier?: PageLayoutModifier | '';
   withoutUserControl?: boolean;
 };
 
 export default function PageLayout({
-  authorizationStatus,
   withFooter,
   children,
   modifier,
@@ -24,10 +23,7 @@ export default function PageLayout({
 }: PropsWithChildren<PageLayoutProps>) {
   return (
     <div className={`page ${modifier}`}>
-      <Header
-        withoutUserControl={withoutUserControl}
-        authorizationStatus={authorizationStatus}
-      />
+      <Header withoutUserControl={withoutUserControl} />
       {children}
       {withFooter && <Footer />}
     </div>

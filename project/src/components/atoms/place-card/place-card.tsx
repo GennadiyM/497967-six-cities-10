@@ -1,38 +1,32 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { PlaceCardClassType, ImageSize, AppRoute } from '../../../const';
 import { BaseOffer } from '../../../types/offer';
+import BookmarksBtn from '../bookmarksBtn/bookmarks-btn';
 import Rating from '../rating/rating';
 
 type PlaceCardProps = {
   offer: BaseOffer;
   cardClass?: PlaceCardClassType;
-  onMouseOver?: () => void;
+  onMouseOver?: (id: number) => void;
   onMouseOut?: () => void;
 };
 
-export default function PlaceCard({
+function PlaceCard({
   offer,
   cardClass = PlaceCardClassType.Main,
   onMouseOver,
   onMouseOut,
 }: PlaceCardProps) {
-  const {
-    isPremium,
-    isFavorite,
-    previewImage,
-    title,
-    rating,
-    type,
-    price,
-    id,
-  } = offer;
+  const { isPremium, previewImage, title, rating, type, price, id } = offer;
   const isFavoriteClass = cardClass === PlaceCardClassType.Favorite;
   const imageSize = isFavoriteClass ? ImageSize.Small : ImageSize.Big;
 
   return (
     <article
+      id={`${id}`}
       className={`${cardClass}__card place-card`}
-      onMouseOver={onMouseOver}
+      onMouseOver={ () => onMouseOver && onMouseOver(id)}
       onMouseOut={onMouseOut}
     >
       {isPremium && (
@@ -61,17 +55,7 @@ export default function PlaceCard({
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button button ${
-              isFavorite && 'place-card__bookmark-button--active'
-            }`}
-            type='button'
-          >
-            <svg className='place-card__bookmark-icon' width='18' height='19'>
-              <use xlinkHref='#icon-bookmark'></use>
-            </svg>
-            <span className='visually-hidden'>To bookmarks</span>
-          </button>
+          <BookmarksBtn id={id} />
         </div>
         <Rating rating={rating} />
         <h2 className='place-card__name'>
@@ -84,3 +68,5 @@ export default function PlaceCard({
     </article>
   );
 }
+
+export default React.memo(PlaceCard);

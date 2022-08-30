@@ -1,0 +1,19 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.page--not-found {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page--not-found .page__main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

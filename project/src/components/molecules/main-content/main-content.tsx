@@ -1,26 +1,27 @@
-import { useState } from 'react';
+import React, { useMemo } from 'react';
+import { useCallback, useState } from 'react';
 import { Sorting } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
-import { getSortType } from '../../../store/helpers';
-import { City, FullOffer } from '../../../types/offer';
+import { getSortType } from '../../../store/logic-process/selectors';
+import { Offer } from '../../../types/offer';
 import { sortByPriceHigh, sortByPriceLow, sortByTopRatedFirst } from '../../../utils';
 import Map from '../../atoms/map/map';
 import PlaceCard from '../../atoms/place-card/place-card';
 import Sort from '../../atoms/sort/sort';
 
 type MainContentProps = {
-  offers: FullOffer[];
-  city: City;
+  offers: Offer[];
 };
 
 export type ActiveOfferType = number | null;
 
-export default function MainContent({ offers, city }: MainContentProps): JSX.Element {
+function MainContent({ offers }: MainContentProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferType>(null);
   const sorting = useAppSelector(getSortType);
+  const city = offers[0].city;
 
-  const getSortingOffers = (stateOffers: FullOffer[]): FullOffer[] => {
-    const sortingOffers = stateOffers.slice();
+  const getSortingOffers = useMemo(() => {
+    const sortingOffers = offers.slice();
 
     switch (sorting) {
       case Sorting.Popular:
@@ -34,8 +35,11 @@ export default function MainContent({ offers, city }: MainContentProps): JSX.Ele
       default:
         return sortingOffers;
     }
-  };
+  }, [sorting, offers]);
 
+  const onMouseOver = useCallback((id: number) => setActiveOfferId(id), []);
+
+  const onMouseOut = useCallback(() => setActiveOfferId(0), []);
 
   return (
     <div className='cities'>
@@ -45,12 +49,12 @@ export default function MainContent({ offers, city }: MainContentProps): JSX.Ele
           <b className='places__found'>{offers.length} places to stay in {city.name}</b>
           <Sort />
           <div className='cities__places-list places__list tabs__content'>
-            {getSortingOffers(offers).map((offer) => (
+            {getSortingOffers.map((offer) => (
               <PlaceCard
                 key={`offer-${offer.id}`}
                 offer={offer}
-                onMouseOver={() => setActiveOfferId(offer.id)}
-                onMouseOut={() => setActiveOfferId(0)}
+                onMouseOver={onMouseOver}
+                onMouseOut={onMouseOut}
               />
             ))}
           </div>
@@ -62,3 +66,5 @@ export default function MainContent({ offers, city }: MainContentProps): JSX.Ele
     </div>
   );
 }
+
+export default React.memo(MainContent);

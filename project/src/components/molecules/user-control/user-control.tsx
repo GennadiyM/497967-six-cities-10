@@ -1,10 +1,13 @@
 import { AuthorizationStatus } from '../../../const';
+import { useAppSelector } from '../../../hooks/redux';
+import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 import SignInBtn from '../../atoms/sing-in-btn/sing-in-btn';
 import User from '../../atoms/user/user';
 
-export default function UserControl({authorizationStatus}: {authorizationStatus: AuthorizationStatus}) {
-  const getUserControl = (status: AuthorizationStatus): JSX.Element => {
+export default function UserControl() {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
+  const getUserControl = (status: AuthorizationStatus): JSX.Element => {
     if (status === AuthorizationStatus.NoAuth) {
       return <SignInBtn/>;
     }

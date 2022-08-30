@@ -1,24 +1,29 @@
 import {
   AuthorizationStatus,
+  BookmarksBtnClass,
   MAX_COUNT_IMAGE,
   RatingClass,
 } from '../../../const';
-import { FullOffer } from '../../../types/offer';
+import { useAppSelector } from '../../../hooks/redux';
+import { getAuthorizationStatus } from '../../../store/user-process/selectors';
+import { Offer } from '../../../types/offer';
+import { ReviewType } from '../../../types/review/review-type';
+import BookmarksBtn from '../../atoms/bookmarksBtn/bookmarks-btn';
 import Host from '../../atoms/host/host';
 import Rating from '../../atoms/rating/rating';
 import Reviews from '../../molecules/reviews/reviews';
 
 export default function FullCard({
   offer,
-  authorizationStatus,
+  comments,
 }: {
-  offer: FullOffer;
-  authorizationStatus: AuthorizationStatus;
+  offer: Offer;
+  comments: ReviewType[] | [];
 }) {
   const {
     images,
     title,
-    isFavorite,
+    id,
     isPremium,
     type,
     bedrooms,
@@ -29,6 +34,8 @@ export default function FullCard({
     description,
     rating,
   } = offer;
+
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <>
@@ -55,23 +62,7 @@ export default function FullCard({
           )}
           <div className='property__name-wrapper'>
             <h1 className='property__name'>{title}</h1>
-            {authorizationStatus === AuthorizationStatus.Auth && (
-              <button
-                className={`property__bookmark-button button ${
-                  isFavorite && 'property__bookmark-button--active'
-                }`}
-                type='button'
-              >
-                <svg
-                  className='property__bookmark-icon place-card__bookmark-icon'
-                  width='31'
-                  height='33'
-                >
-                  <use xlinkHref='#icon-bookmark'></use>
-                </svg>
-                <span className='visually-hidden'>To bookmarks</span>
-              </button>
-            )}
+            <BookmarksBtn id={id} modifier={BookmarksBtnClass.Property}/>
           </div>
           <div className='property__rating rating'>
             <Rating rating={rating} ratingClass={RatingClass.Property} />
@@ -107,7 +98,8 @@ export default function FullCard({
             </div>
           )}
           <Host host={host} description={description} />
-          {authorizationStatus === AuthorizationStatus.Auth && <Reviews />}
+          {authorizationStatus === AuthorizationStatus.Auth &&
+            comments.length > 0 && <Reviews comments={comments} />}
         </div>
       </div>
     </>

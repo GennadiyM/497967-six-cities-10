@@ -1,20 +1,5 @@
-import { CityName } from './city-name';
-
-export type HostType = {
-  avatarUrl: string;
-  id: number;
-  isPro: boolean;
-  name: string;
-};
-
-export type City = {
-  name: CityName;
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-};
+import { City } from './city';
+import { Host } from './host';
 
 export type BaseOffer = {
   isPremium: boolean;
@@ -27,12 +12,12 @@ export type BaseOffer = {
   id: number;
 };
 
-export type FullOffer = BaseOffer & {
+export type Offer = BaseOffer & {
   bedrooms: number;
   city: City;
   description: string;
   goods: string[];
-  host: HostType;
+  host: Host;
   images: string[];
   location: {
     latitude: number;

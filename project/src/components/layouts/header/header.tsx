@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../../const';
+import { AppRoute } from '../../../const';
 import UserControl from '../../molecules/user-control/user-control';
 
 export default function Header({
-  authorizationStatus,
   withoutUserControl = false,
 }: {
-  authorizationStatus: AuthorizationStatus;
   withoutUserControl?: boolean;
 }) {
   return (
@@ -27,9 +25,7 @@ export default function Header({
               />
             </Link>
           </div>
-          {!withoutUserControl && (
-            <UserControl authorizationStatus={authorizationStatus} />
-          )}
+          {!withoutUserControl && <UserControl />}
         </div>
       </div>
     </header>

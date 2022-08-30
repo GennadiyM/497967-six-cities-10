@@ -6,6 +6,8 @@ export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensi
 
 export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export const CITIES: ReadonlyArray<CityName> = [
   'Paris',
   'Cologne',
@@ -43,6 +45,22 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+  Favorite = '/favorite',
+  Comments = '/comments',
+}
+
+export enum NameSpace {
+  User = 'USER',
+  App = 'APP',
+  Favorite = 'FAVORITE',
+  Property = 'PROPERTY',
+  Logic = 'LOGIC',
+}
+
 export enum PlaceCardClassType {
   Main = 'cities',
   Near = 'near-places',
@@ -54,6 +72,22 @@ export enum RatingClass {
   Property = 'property',
   Reviews = 'reviews',
 }
+
+export enum BookmarksBtnClass {
+  Card = 'place-card__bookmark-button',
+  Property = 'property__bookmark-button',
+}
+
+export const BookmarksIconSize = {
+  Big: {
+    height: 31,
+    width: 33,
+  },
+  Small: {
+    height: 19,
+    width: 18,
+  }
+};
 
 export enum MapClass {
   City = 'cities__map',

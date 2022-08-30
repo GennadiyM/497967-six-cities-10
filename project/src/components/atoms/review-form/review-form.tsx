@@ -1,8 +1,19 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { RatingValue, RatingTitle, ReviewLength } from '../../../const';
+import { useAppDispatch } from '../../../hooks/redux';
+import { postReviewAction } from '../../../store/api-actions';
+
+const INITIAL_FORM_DATA = {
+  rating: '0',
+  comment: '',
+};
 
 export default function ReviewForm() {
-  const [formData, setFormData] = useState({ review: '', rating: '0' });
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const fieldChangeHandle = (
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -12,48 +23,70 @@ export default function ReviewForm() {
   };
 
   const isDisableSubmit = () =>
-    +formData.rating <= RatingValue.MIN ||
-    +formData.rating >= RatingValue.MAX ||
-    formData.review.length <= ReviewLength.MIN ||
-    formData.review.length >= ReviewLength.MAX;
+    +formData.rating < RatingValue.MIN ||
+    +formData.rating > RatingValue.MAX ||
+    formData.comment.length <= ReviewLength.MIN ||
+    formData.comment.length >= ReviewLength.MAX;
+
+  const handelReviewSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (!isDisableSubmit() && id) {
+      dispatch(postReviewAction({ id, formData }));
+      setFormData(INITIAL_FORM_DATA);
+
+      if (textareaRef.current) {
+        textareaRef.current.value = '';
+      }
+    }
+  };
 
   return (
-    <form className='reviews__form form' action='#' method='post'>
+    <form
+      className='reviews__form form'
+      action='#'
+      method='post'
+      onSubmit={handelReviewSubmit}
+    >
       <label className='reviews__label form__label' htmlFor='review'>
         Your review
       </label>
 
       <div className='reviews__rating-form form__rating'>
-        {Object.entries(RatingTitle).map(([value, name]) => (
-          <Fragment key={name}>
-            <input
-              className='form__rating-input visually-hidden'
-              name='rating'
-              value={value}
-              id={`${value}-stars}`}
-              type='radio'
-              onChange={fieldChangeHandle}
-              checked={formData.rating === value}
-            />
-            <label
-              htmlFor={`${value}-stars}`}
-              className='reviews__rating-label form__rating-label'
-              title={name}
-            >
-              <svg className='form__star-image' width='37' height='33'>
-                <use xlinkHref='#icon-star'></use>
-              </svg>
-            </label>
-          </Fragment>
-        ))}
+        {Object.entries(RatingTitle)
+          .reverse()
+          .map(([value, name]) => (
+            <Fragment key={name}>
+              <input
+                className='form__rating-input visually-hidden'
+                name='rating'
+                value={value}
+                id={`${value}-stars`}
+                type='radio'
+                onChange={fieldChangeHandle}
+                checked={formData.rating === value}
+              />
+              <label
+                htmlFor={`${value}-stars`}
+                className='reviews__rating-label form__rating-label'
+                title={name}
+              >
+                <svg className='form__star-image' width='37' height='33'>
+                  <use xlinkHref='#icon-star'></use>
+                </svg>
+              </label>
+            </Fragment>
+          ))}
       </div>
+      <p>{formData.comment}</p>
       <textarea
         className='reviews__textarea form__textarea'
-        id='review'
-        name='review'
+        id='comment'
+        name='comment'
         placeholder='Tell how was your stay, what you like and what can be improved'
         onChange={fieldChangeHandle}
-        defaultValue={formData.review}
+        defaultValue={formData.comment}
+        ref={textareaRef}
       />
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>

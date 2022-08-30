@@ -20,6 +20,10 @@ export type Data = {
   isOffersLoaded: boolean;
 }
 
+export type FavoriteOffers = {
+  favoriteOffers: Offer[] | null;
+  isFavoriteOffersLoaded: boolean;
+}
 export type PropertyData = {
   offer: null | Offer,
   isOfferLoaded: boolean,

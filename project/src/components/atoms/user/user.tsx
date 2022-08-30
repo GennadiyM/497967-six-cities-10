@@ -1,14 +1,28 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { logoutAction } from '../../../store/api-actions';
-import { getFavoriteData } from '../../../store/favorite-data/selectors';
+import { fetchFavoriteOffersAction, logoutAction } from '../../../store/api-actions';
+import { getFavoriteOffers } from '../../../store/favorite-data/selectors';
 import { getUserData } from '../../../store/user-process/selectors';
 
 export default function User() {
   const dispatch = useAppDispatch();
-  const favoriteOffers = useAppSelector(getFavoriteData);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
   const user = useAppSelector(getUserData);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted && !favoriteOffers) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, favoriteOffers]);
+
 
   return (
     <nav className='header__nav'>
@@ -22,7 +36,7 @@ export default function User() {
               <div className='header__avatar-wrapper user__avatar-wrapper'></div>
               <span className='header__user-name user__name'>{user.name}</span>
               <span className='header__favorite-count'>
-                {favoriteOffers.length}
+                {favoriteOffers && favoriteOffers.length}
               </span>
             </Link>
           </li>

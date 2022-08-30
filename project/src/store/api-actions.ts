@@ -90,12 +90,12 @@ export const postReviewAction = createAsyncThunk<
   ThunkAPIConfigType
 >(
   `${NameSpace.Property}/postReview`,
-  async ({ id, comment: { comment, rating } }, { dispatch, extra: api }) => {
+  async ({ id, formData: {comment, rating} }, { dispatch, extra: api }) => {
     await api.post<ReviewFormData>(`${APIRoute.Comments}/${id}`, {
-      rating,
       comment,
+      rating,
     });
-    dispatch(fetchReviewsAction(id));
+    dispatch(fetchReviewsAction(+id));
   }
 );
 
@@ -108,14 +108,16 @@ export const checkAuthAction = createAsyncThunk<
   return data;
 });
 
-export const loginAction = createAsyncThunk<void, AuthData, ThunkAPIConfigType>(
+export const loginAction = createAsyncThunk<UserData, AuthData, ThunkAPIConfigType>(
   `${NameSpace.User}/login`,
   async ({ email, password }, { dispatch, extra: api }) => {
-    const {
-      data: { token },
-    } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(token);
+    const { data } = await api.post<UserData>(APIRoute.Login, {
+      email,
+      password,
+    });
+    saveToken(data.token);
     dispatch(redirectToRoute(AppRoute.Root));
+    return data;
   }
 );
 

@@ -7,7 +7,7 @@ import {
 } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { postFavoriteAction } from '../../../store/api-actions';
-import { getFavoriteData } from '../../../store/favorite-data/selectors';
+import { getFavoriteOffers } from '../../../store/favorite-data/selectors';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
 
 export default function BookmarksBtn({
@@ -19,8 +19,8 @@ export default function BookmarksBtn({
 }) {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const favoriteOffers = useAppSelector(getFavoriteData);
-  const isFavorite = favoriteOffers.some((item) => item.id === id);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const isFavorite = favoriteOffers && favoriteOffers.some((item) => item.id === id);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   const iconSize =
     BookmarksIconSize[modifier === BookmarksBtnClass.Card ? 'Small' : 'Big'];

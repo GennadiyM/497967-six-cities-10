@@ -16,7 +16,7 @@ export const logicProcess = createSlice({
       state.city = action.payload;
     },
     changeSorting: (state, action) => {
-      state.city = action.payload;
+      state.sorting = action.payload;
     }
   },
 });

@@ -6,11 +6,12 @@ export enum PageLayoutModifier {
   Main = 'page--gray page--main',
   Login = 'page--gray page--login',
   FavoritesEmpty = 'page--favorites-empty',
+  NotFound = 'page--not-found'
 }
 
 type PageLayoutProps = {
   withFooter?: boolean;
-  modifier?: PageLayoutModifier;
+  modifier?: PageLayoutModifier | '';
   withoutUserControl?: boolean;
 };
 

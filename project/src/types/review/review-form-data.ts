@@ -1,4 +1,4 @@
 export type ReviewFormData = {
-  rating: number;
+  rating: string;
   comment: string;
 };

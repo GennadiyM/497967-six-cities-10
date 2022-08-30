@@ -3,15 +3,15 @@ import { compareDays } from '../../../utils';
 import ReviewForm from '../../atoms/review-form/review-form';
 import Review from '../../atoms/review/review';
 
+const MAX_COUNT_COMMENT = 10;
+
 export default function Reviews({ comments }: { comments: ReviewType[] }) {
-
-  const sortedComments = [...comments].sort(compareDays);
-
+  const sortedComments = [...comments].slice(0, MAX_COUNT_COMMENT).sort(compareDays);
 
   return (
     <section className='property__reviews reviews'>
       <h2 className='reviews__title'>
-        Reviews &middot; <span className='reviews__amount'>{comments.length}</span>
+        Reviews &middot; <span className='reviews__amount'>{sortedComments.length}</span>
       </h2>
       <ul className='reviews__list'>
         {sortedComments.map((comment) => (

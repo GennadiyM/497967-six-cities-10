@@ -1,4 +1,5 @@
-import './css/loading-screen.css';
+import './loading-screen.style.css';
+
 export default function LoadingScreen() {
   return (
     <div className="loading">

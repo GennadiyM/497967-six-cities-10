@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { Data } from '../../types/store';
+import { FavoriteOffers } from '../../types/store';
 import { fetchFavoriteOffersAction } from '../api-actions';
 
-const initialState: Data = {
-  offers: [],
-  isOffersLoaded: false,
+const initialState: FavoriteOffers = {
+  favoriteOffers: null,
+  isFavoriteOffersLoaded: false,
 };
 
 export const favoriteData = createSlice({
@@ -15,11 +15,11 @@ export const favoriteData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
-        state.isOffersLoaded = false;
+        state.isFavoriteOffersLoaded = true;
       })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
-        state.isOffersLoaded = true;
-        state.offers = action.payload;
+        state.isFavoriteOffersLoaded = false;
+        state.favoriteOffers = action.payload;
       });
   }
 });

@@ -19,6 +19,7 @@ export default function App() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isDataLoaded = useAppSelector(getAppDataLoadedStatus);
 
+
   if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {
     return (
       <LoadingScreen />

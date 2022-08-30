@@ -1,9 +1,7 @@
-import { useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { PlaceCardClassType, ImageSize, AppRoute, AuthorizationStatus } from '../../../const';
-import { useAppSelector } from '../../../hooks/redux';
-import { getAuthorizationStatus } from '../../../store/selectors';
+import { Link } from 'react-router-dom';
+import { PlaceCardClassType, ImageSize, AppRoute } from '../../../const';
 import { BaseOffer } from '../../../types/offer';
+import BookmarksBtn from '../bookmarksBtn/bookmarks-btn';
 import Rating from '../rating/rating';
 
 type PlaceCardProps = {
@@ -21,7 +19,6 @@ export default function PlaceCard({
 }: PlaceCardProps) {
   const {
     isPremium,
-    isFavorite,
     previewImage,
     title,
     rating,
@@ -31,14 +28,6 @@ export default function PlaceCard({
   } = offer;
   const isFavoriteClass = cardClass === PlaceCardClassType.Favorite;
   const imageSize = isFavoriteClass ? ImageSize.Small : ImageSize.Big;
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const navigate = useNavigate();
-
-  const onFavoriteClick = useCallback(() => {
-    if (authorizationStatus === AuthorizationStatus.NoAuth) {
-      navigate(AppRoute.Login);
-    }
-  }, [authorizationStatus, navigate]);
 
   return (
     <article
@@ -72,18 +61,7 @@ export default function PlaceCard({
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button button ${
-              isFavorite && 'place-card__bookmark-button--active'
-            }`}
-            type='button'
-            onClick={onFavoriteClick}
-          >
-            <svg className='place-card__bookmark-icon' width='18' height='19'>
-              <use xlinkHref='#icon-bookmark'></use>
-            </svg>
-            <span className='visually-hidden'>{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+          <BookmarksBtn id={id}/>
         </div>
         <Rating rating={rating} />
         <h2 className='place-card__name'>

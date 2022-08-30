@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Sorting } from '../../../const';
 import { useAppSelector } from '../../../hooks/redux';
-import { getSortType } from '../../../store/selectors';
+import { getSortType } from '../../../store/logic-process/selectors';
 import { Offer } from '../../../types/offer';
 import { sortByPriceHigh, sortByPriceLow, sortByTopRatedFirst } from '../../../utils';
 import Map from '../../atoms/map/map';

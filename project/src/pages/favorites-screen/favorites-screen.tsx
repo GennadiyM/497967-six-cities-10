@@ -4,10 +4,10 @@ import PageLayout, {
 } from '../../components/layouts/page-layout/page-layout';
 import FavoritesContainer from '../../components/molecules/favorites-container/favorites-container';
 import { useAppSelector } from '../../hooks/redux';
-import { getFavoriteOffers } from '../../store/selectors';
+import { getFavoriteData } from '../../store/favorite-data/selectors';
 
 export default function FavoritesScreen() {
-  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const favoriteOffers = useAppSelector(getFavoriteData);
 
   return (
     <PageLayout

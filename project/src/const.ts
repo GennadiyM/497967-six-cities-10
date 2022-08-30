@@ -54,9 +54,11 @@ export enum APIRoute {
 }
 
 export enum NameSpace {
-  Data = 'DATA',
-  Logic = 'LOGIC',
   User = 'USER',
+  App = 'APP',
+  Favorite = 'FAVORITE',
+  Property = 'PROPERTY',
+  Logic = 'LOGIC',
 }
 
 export enum PlaceCardClassType {
@@ -70,6 +72,22 @@ export enum RatingClass {
   Property = 'property',
   Reviews = 'reviews',
 }
+
+export enum BookmarksBtnClass {
+  Card = 'place-card__bookmark-button',
+  Property = 'property__bookmark-button',
+}
+
+export const BookmarksIconSize = {
+  Big: {
+    height: 31,
+    width: 33,
+  },
+  Small: {
+    height: 19,
+    width: 18,
+  }
+};
 
 export enum MapClass {
   City = 'cities__map',

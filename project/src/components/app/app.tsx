@@ -8,15 +8,18 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
+import { getAppDataLoadedStatus } from '../../store/app-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import HistoryRoute from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scrollToTop/scrollToTop';
 
 
 export default function App() {
-  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isDataLoaded = useAppSelector(getAppDataLoadedStatus);
 
-  if (isDataLoaded || authorizationStatus === AuthorizationStatus.Unknown) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {
     return (
       <LoadingScreen />
     );

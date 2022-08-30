@@ -1,10 +1,19 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoginForm from '../../components/atoms/login-form/login-form';
 import PageLayout, {
   PageLayoutModifier,
 } from '../../components/layouts/page-layout/page-layout';
+import { CITIES } from '../../const';
+import { changeCity } from '../../store/logic-process/logic-process';
+import { randomInteger } from '../../utils';
 
 export default function LoginScreen() {
+  const dispatch = useDispatch();
+  const city = CITIES[randomInteger(0, CITIES.length)];
+
+  const onLickClick = () => dispatch(changeCity(city));
+
   return (
     <PageLayout
       modifier={PageLayoutModifier.Login}
@@ -18,8 +27,8 @@ export default function LoginScreen() {
           </section>
           <section className='locations locations--login locations--current'>
             <div className='locations__item'>
-              <Link className='locations__item-link' to='/?city=Amsterdam'>
-                <span>Amsterdam</span>
+              <Link className='locations__item-link' to={`/?city=${city}`} onClick={onLickClick}>
+                <span>{city}</span>
               </Link>
             </div>
           </section>

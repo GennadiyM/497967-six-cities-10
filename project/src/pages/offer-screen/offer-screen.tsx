@@ -1,48 +1,61 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Map from '../../components/atoms/map/map';
-import NotFound from '../../components/atoms/not-found/not-found';
 import PageLayout from '../../components/layouts/page-layout/page-layout';
 import NearPlaces from '../../components/molecules/near-places/near-places';
 import FullCard from '../../components/organisms/full-card/full-card';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getNearbyOffers, getOffer } from '../../store/selectors';
+import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction } from '../../store/api-actions';
+import { getNearbyOffers, getNearbyOffersLoadedStatus, getOffer, getOfferLoadedStatus, getReviews } from '../../store/property-data/selectors';
+
 import LoadingScreen from '../loading-screen/loading-screen';
-import { fetchOfferByIdAction, fetchNearbyPlacesAction } from '../../store/api-action';
+
+const MAX_COUNT_NEAR_PLACE = 3;
 
 export default function OfferScreen() {
   const { id } = useParams();
-  const offer = useAppSelector(getOffer);
+  const dispatch = useAppDispatch();
+  const hotel = useAppSelector(getOffer);
+  const comments = useAppSelector(getReviews);
   const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isOfferLoaded = useAppSelector(getOfferLoadedStatus);
+  const isNearbyLoaded = useAppSelector(getNearbyOffersLoadedStatus);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferAction(+id));
+      dispatch(fetchReviewsAction(+id));
+      dispatch(fetchNearbyOffersAction(+id));
 
+    }
+  }, [dispatch, id]);
+
+  if (isOfferLoaded || isNearbyLoaded) {
+    return <LoadingScreen />;
+  }
   return (
     <PageLayout>
-      {offer ? (
-        <main className='page__main page__main--property'>
-          <section className='property'>
-            <FullCard
-              offer={offer}
+      <main className='page__main page__main--property'>
+        <section className='property'>
+          {hotel && <FullCard offer={hotel} comments={comments}/>}
+          {hotel && (
+            <Map
+              className={'property__map'}
+              activePointId={+hotel.id}
+              city={hotel.city}
+              points={[...nearbyOffers, hotel]}
+              style={{
+                maxWidth: '60%',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+              }}
             />
-            {nearbyOffers && id && (
-              <Map
-                className={'property__map'}
-                activePointId={+id}
-                city={offer.city}
-                points={[...nearbyOffers, offer]}
-                style={{
-                  maxWidth: '60%',
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                }}
-              />
-            )}
-          </section>
-          {nearbyOffers && <NearPlaces offers={nearbyOffers} />}
-        </main>
-      ) : (
-        <NotFound />
-      )}
+          )}
+        </section>
+        {nearbyOffers && (
+          <NearPlaces offers={nearbyOffers.slice(0, MAX_COUNT_NEAR_PLACE)} />
+        )}
+      </main>
     </PageLayout>
   );
 }

@@ -1,7 +1,7 @@
 import { FormEvent, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../../hooks/redux';
-import { loginAction } from '../../../store/api-action';
+import { loginAction } from '../../../store/api-actions';
 import { AuthData } from '../../../types/auth-data';
 
 const INVALID_PASSWORD_MESSAGE = 'Пароль должен состоять минимум из одной буквы и цифры';

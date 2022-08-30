@@ -1,5 +1,8 @@
+import './css/loading-screen.css';
 export default function LoadingScreen() {
   return (
-    <p>Loading...</p>
+    <div className="loading">
+      <p>Loading...</p>
+    </div>
   );
 }

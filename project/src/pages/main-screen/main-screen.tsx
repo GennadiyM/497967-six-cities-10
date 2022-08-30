@@ -1,3 +1,4 @@
+
 import PageLayout, {
   PageLayoutModifier,
 } from '../../components/layouts/page-layout/page-layout';
@@ -5,10 +6,12 @@ import CitiesTabs from '../../components/molecules/cities-tabs/cities-tabs';
 import MainContent from '../../components/molecules/main-content/main-content';
 import MainEmpty from '../../components/molecules/main-empty/main-empty';
 import { useAppSelector } from '../../hooks/redux';
-import { getState } from '../../store/selectors';
+import { getAppData } from '../../store/app-data/selectors';
+import { getCity } from '../../store/logic-process/selectors';
 
 export default function MainScreen() {
-  const { city, offers } = useAppSelector(getState);
+  const city = useAppSelector(getCity);
+  const offers = useAppSelector(getAppData);
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
 
   return (

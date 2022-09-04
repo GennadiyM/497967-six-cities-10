@@ -6,7 +6,7 @@ import Review from '../../atoms/review/review';
 const MAX_COUNT_COMMENT = 10;
 
 export default function Reviews({ comments }: { comments: ReviewType[] }) {
-  const sortedComments = [...comments].slice(0, MAX_COUNT_COMMENT).sort(compareDays);
+  const sortedComments = [...comments].sort(compareDays).slice(0, MAX_COUNT_COMMENT);
 
   return (
     <section className='property__reviews reviews'>

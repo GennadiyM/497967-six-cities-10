@@ -78,7 +78,6 @@ export default function ReviewForm() {
             </Fragment>
           ))}
       </div>
-      <p>{formData.comment}</p>
       <textarea
         className='reviews__textarea form__textarea'
         id='comment'

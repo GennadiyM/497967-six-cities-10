@@ -15,7 +15,7 @@ export default function ReviewForm() {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const fieldChangeHandle = (
+  const handlerFieldChange = (
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = evt.target;
@@ -63,7 +63,7 @@ export default function ReviewForm() {
                 value={value}
                 id={`${value}-stars`}
                 type='radio'
-                onChange={fieldChangeHandle}
+                onChange={handlerFieldChange}
                 checked={formData.rating === value}
               />
               <label
@@ -83,7 +83,7 @@ export default function ReviewForm() {
         id='comment'
         name='comment'
         placeholder='Tell how was your stay, what you like and what can be improved'
-        onChange={fieldChangeHandle}
+        onChange={handlerFieldChange}
         defaultValue={formData.comment}
         ref={textareaRef}
       />

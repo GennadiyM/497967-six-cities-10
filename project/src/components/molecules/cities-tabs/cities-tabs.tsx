@@ -10,7 +10,7 @@ export default function CitiesTabs(): JSX.Element {
   const city = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
-  const cityClickHandler = (evt: MouseEvent) => {
+  const handlerСityClick = (evt: MouseEvent) => {
     const activeElement = evt.target as HTMLLinkElement;
     dispatch(changeCity(activeElement.dataset.city));
   };
@@ -25,7 +25,7 @@ export default function CitiesTabs(): JSX.Element {
                 city={cityName}
                 data-city={cityName}
                 isActive={city === cityName}
-                onClick={cityClickHandler}
+                handlerTabClick={handlerСityClick}
               />
             </li>
           ))}

@@ -26,7 +26,7 @@ export default function BookmarksBtn({
     BookmarksIconSize[modifier === BookmarksBtnClass.Card ? 'Small' : 'Big'];
   const navigate = useNavigate();
 
-  const onFavoriteClick = () => {
+  const handlerFavoriteClick = () => {
     if (!isAuthorized) {
       navigate(AppRoute.Login);
     }
@@ -42,7 +42,7 @@ export default function BookmarksBtn({
         isFavorite && isAuthorized && 'place-card__bookmark-button--active'
       }`}
       type='button'
-      onClick={onFavoriteClick}
+      onClick={handlerFavoriteClick}
     >
       <svg
         className='place-card__bookmark-icon'

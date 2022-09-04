@@ -12,7 +12,7 @@ export default function LoginScreen() {
   const dispatch = useDispatch();
   const city = CITIES[randomInteger(0, CITIES.length)];
 
-  const onLickClick = () => dispatch(changeCity(city));
+  const handlerLickClick = () => dispatch(changeCity(city));
 
   return (
     <PageLayout
@@ -27,7 +27,7 @@ export default function LoginScreen() {
           </section>
           <section className='locations locations--login locations--current'>
             <div className='locations__item'>
-              <Link className='locations__item-link' to={`/?city=${city}`} onClick={onLickClick}>
+              <Link className='locations__item-link' to={`/?city=${city}`} onClick={handlerLickClick}>
                 <span>{city}</span>
               </Link>
             </div>

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 type CityTabProps = {
   city: string;
   isActive: boolean;
-  onClick: MouseEventHandler;
+  handlerTabClick: MouseEventHandler;
 };
 
-export default function CityTab({ city, isActive, onClick }: CityTabProps) {
+export default function CityTab({ city, isActive, handlerTabClick }: CityTabProps) {
   return (
     <Link
       className={`locations__item-link tabs__item ${
@@ -15,7 +15,7 @@ export default function CityTab({ city, isActive, onClick }: CityTabProps) {
       }`}
       to={`?city=${city}`}
       data-city={city}
-      onClick={onClick}
+      onClick={handlerTabClick}
     >
       <span data-city={city}>{city}</span>
     </Link>

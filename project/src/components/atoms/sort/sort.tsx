@@ -10,9 +10,9 @@ function Sort() {
   const sorting = useAppSelector(getSortType);
   const dispatch = useAppDispatch();
 
-  const filterOpenClickHandler = () => setIsOpened(!isOpened);
+  const handlerFilterOpenClick = () => setIsOpened(!isOpened);
 
-  const filerOptionClickHandler = (evt: MouseEvent) => {
+  const handlerFilerOptionClick = (evt: MouseEvent) => {
     const activeElement = evt.target as HTMLLIElement;
     if (sorting !== activeElement.dataset.target) {
       dispatch(changeSorting(activeElement.dataset.target ?? Sorting.Popular));
@@ -26,7 +26,7 @@ function Sort() {
       <span
         className='places__sorting-type'
         tabIndex={0}
-        onClick={filterOpenClickHandler}
+        onClick={handlerFilterOpenClick}
       >
         {SORTING_NAME[sorting]}
         <svg className='places__sorting-arrow' width='7' height='4'>
@@ -46,7 +46,7 @@ function Sort() {
             }`}
             data-target={value}
             tabIndex={0}
-            onClick={filerOptionClickHandler}
+            onClick={handlerFilerOptionClick}
           >
             {SORTING_NAME[value]}
           </li>
